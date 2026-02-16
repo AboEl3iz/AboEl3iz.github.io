@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio of Karim Hassan, a Backend Engineer specializing in Node.js, NestJS, and scalable system design.">
+    <title>Karim Hassan | Backend Engineer</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <style>
+        /* Modern Reset & variable definitions */
+        :root {
+            --bg-main: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-hover: #0ea5e9;
+            --accent: #818cf8;
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --border: rgba(148, 163, 184, 0.1);
+            --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --glow: 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Typography elements */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary), transparent);
+            opacity: 0.3;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header / Hero */
+        header {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 99px;
+            color: var(--primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 4rem;
+            /* Removed opacity: 0 and transform for PDF reliability */
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: var(--glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .card-date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category strong {
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+        }
+
+        /* Lists in cards */
+        ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Tech Stack Badge */
+        .tech-stack {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .tech-item {
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+            }
+
+            .contact-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: var(--bg-main) !important;
+                background-image: none !important;
+                /* simplify background for PDF stability */
+                width: 210mm;
+                height: 100%;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 15mm;
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                /* Reduce header size for print */
+            }
+
+            section {
+                margin-bottom: 2rem;
+                page-break-inside: avoid;
+            }
+
+            .card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(148, 163, 184, 0.2);
+                /* Ensure border is visible */
+                box-shadow: none;
+                /* Remove shadow for cleaner print */
+            }
+
+            /* Ensure text wraps nicely */
+            p,
+            li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            /* skills grid adjustment */
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* Force 2 columns for better A4 fit */
+                gap: 1rem;
+            }
+
+            /* Remove contact buttons styling for cleaner look, just show text */
+            .contact-btn {
+                background: none !important;
+                border: none !important;
+                padding: 0;
+                color: var(--text-main) !important;
+                text-decoration: underline;
+            }
+
+            a {
+                text-decoration: none !important;
+                color: var(--primary) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Karim Hassan</h1>
+            <h2>Backend Engineer | Node.js • NestJS • PostgreSQL • System Design</h2>
+            <div class="contact-links"><a href="https://wa.me/201004898174" target="_blank" class="contact-btn"><i
+                        class="fab fa-whatsapp"></i>WhatsApp </a><a href="mailto:hassankaram216@gmail.com"
+                    class="contact-btn"><i class="fas fa-envelope"></i>Email </a><a
+                    href="https://www.linkedin.com/in/karim-hassan-221b952b1/" target="_blank" class="contact-btn"><i
+                        class="fab fa-linkedin"></i>LinkedIn </a><a href="https://github.com/AboEl3iz" target="_blank"
+                    class="contact-btn"><i class="fab fa-github"></i>GitHub </a></div>
+        </header>
+        <section id="summary" class="visible">
+            <h3><i class="fas fa-user-check"></i>Summary</h3>
+            <div class="card">
+                <p>Backend Engineer with expertise in <strong>Node.js,
+                        NestJS,
+                        Express,
+                        and Django</strong>,
+                    building scalable and high-performance systems. Deep experience designing and optimizing PostgreSQL
+                    and NoSQL databases,
+                    modeling complex relationships,
+                    and crafting efficient queries for large-scale applications.</p><br>
+                <p>Skilled in building production-ready APIs,
+                    implementing DevOps workflows with Docker and Linux,
+                    and ensuring reliability and maintainability in distributed systems. Proven ability to tackle
+                    complex backend challenges and deliver robust,
+                    end-to-end solutions.</p>
+            </div>
+        </section>
+        <section id="skills">
+            <h3><i class="fas fa-code"></i>Technical Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-category"><strong>Programming Languages</strong>
+                    <div class="skill-tags"><span class="skill-tag">Python</span><span
+                            class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span><span
+                            class="skill-tag">SQL</span><span class="skill-tag">C++</span><span
+                            class="skill-tag">C</span></div>
+                </div>
+                <div class="skill-category"><strong>Backend Frameworks</strong>
+                    <div class="skill-tags"><span class="skill-tag">Django</span><span
+                            class="skill-tag">Express</span><span class="skill-tag">NestJS</span><span
+                            class="skill-tag">FastAPI</span><span class="skill-tag">WebRTC</span></div>
+                </div>
+                <div class="skill-category"><strong>Databases & ORM</strong>
+                    <div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span
+                            class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span
+                            class="skill-tag">Cassandra</span><span class="skill-tag">Elasticsearch</span><span
+                            class="skill-tag">Redis</span><span class="skill-tag">TypeORM</span><span
+                            class="skill-tag">Prisma</span></div>
+                </div>
+                <div class="skill-category"><strong>Message Queues & Caching</strong>
+                    <div class="skill-tags"><span class="skill-tag">RabbitMQ</span><span
+                            class="skill-tag">BullMQ</span><span class="skill-tag">Redis</span></div>
+                </div>
+                <div class="skill-category"><strong>AI & ML Tools</strong>
+                    <div class="skill-tags"><span class="skill-tag">OpenAI (Whisper, GPT)</span><span
+                            class="skill-tag">RAG</span><span class="skill-tag">LangChain</span></div>
+                </div>
+                <div class="skill-category"><strong>DevOps & Deployment</strong>
+                    <div class="skill-tags"><span class="skill-tag">Docker & Compose</span><span
+                            class="skill-tag">Linux</span><span class="skill-tag">GCP</span><span
+                            class="skill-tag">AWS</span><span class="skill-tag">CI/CD</span><span
+                            class="skill-tag">Grafana</span></div>
+                </div>
+                <div class="skill-category"><strong>Testing & Tools</strong>
+                    <div class="skill-tags"><span class="skill-tag">Jest</span><span
+                            class="skill-tag">Supertest</span><span class="skill-tag">Git/GitHub</span></div>
+                </div>
+            </div>
+        </section>
+        <section id="projects">
+            <h3><i class="fas fa-laptop-code"></i>Featured Projects</h3>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Multi-Gym Management System</span><span
+                        class="card-subtitle"><a href="https://github.com/AboEl3iz/multi-gym.git" target="_blank"><i
+                                class="fab fa-github"></i>View Code</a></span></div>
+                <ul>
+                    <li>Centralized Node.js/Express platform streamlining operations for multi-branch fitness centers,
+                        automating class scheduling with conflict detection.</li>
+                    <li>Developed granular,
+                        role-based dashboards (SuperAdmin, BranchAdmin, Trainer, Member) delivering real-time analytics.
+                    </li>
+                    <li>Implemented a relational database using TypeORM,
+                        secure JWT authentication,
+                        and Socket.IO for real-time chat.</li>
+                </ul>
+                <div class="tech-stack"><span class="tech-item">Node.js</span><span
+                        class="tech-item">Express</span><span class="tech-item">PostgreSQL</span><span
+                        class="tech-item">Socket.IO</span><span class="tech-item">TypeORM</span></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Inventory & Sales Management System</span><span
+                        class="card-subtitle"><a href="https://github.com/AboEl3iz" target="_blank"><i
+                                class="fab fa-github"></i>View Code</a></span></div>
+                <ul>
+                    <li>Built a multi-branch inventory system with real-time stock tracking,
+                        complete product catalog with variants,
+                        and Cloudinary image storage.</li>
+                    <li>Implemented supplier management,
+                        automated reorder suggestions,
+                        purchase order processing,
+                        and detailed financial reporting.</li>
+                    <li>Designed role-based access control with employee performance analytics and real-time stock
+                        movement tracking.</li>
+                    <li>Developed event-driven architecture with Redis caching and structured logging using Winston.
+                    </li>
+                </ul>
+                <div class="tech-stack"><span class="tech-item">NestJS</span><span
+                        class="tech-item">TypeScript</span><span class="tech-item">PostgreSQL</span><span
+                        class="tech-item">Redis</span><span class="tech-item">BullMQ</span></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">AI-Powered Video Conferencing Platform</span><span
+                        class="card-subtitle"><a href="https://github.com/AboEl3iz" target="_blank"><i
+                                class="fab fa-github"></i>View Code</a></span></div>
+                <ul>
+                    <li>Built a WebRTC-based video conferencing platform with real-time peer-to-peer connections.</li>
+                    <li>Integrated AI features including live transcription using OpenAI Whisper,
+                        automated meeting summarization.</li>
+                    <li>Designed backend services for signaling and messaging using Node.js,
+                        Redis,
+                        and RabbitMQ.</li>
+                    <li>Exposed AI-powered APIs via FastAPI,
+                        containerized with Docker,
+                        deployed on Linux.</li>
+                </ul>
+                <div class="tech-stack"><span class="tech-item">WebRTC</span><span class="tech-item">Node.js</span><span
+                        class="tech-item">Redis</span><span class="tech-item">RabbitMQ</span><span
+                        class="tech-item">FastAPI</span><span class="tech-item">OpenAI Whisper</span></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">ClinIQ-MedAI (Graduation Project)</span><span
+                        class="card-subtitle">Mansoura University</span></div>
+                <ul>
+                    <li>Designed an advanced database schema for a comprehensive medical application supporting
+                        multi-profile users (patients and doctors).</li>
+                    <li>Integrated seamless AI model support for medical diagnostics.</li>
+                    <li>Supervised by Assoc. Prof. Dr. Mohamed Sabry Saraya.</li>
+                </ul>
+                <div class="tech-stack"><span class="tech-item">Database Design</span><span class="tech-item">System
+                        Architecture</span><span class="tech-item">AI Integration</span></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">TextVision: Handwritten OCR System</span><span
+                        class="card-subtitle">Deep Learning</span></div>
+                <ul>
+                    <li>Developed an OCR system utilizing Deep Learning to accurately process handwritten text.</li>
+                    <li>Implemented CRAFT for precise text localization and detection.</li>
+                    <li>Integrated PARSEQ for high-fidelity word recognition.</li>
+                </ul>
+                <div class="tech-stack"><span class="tech-item">Python</span><span class="tech-item">PyTorch</span><span
+                        class="tech-item">CRAFT</span><span class="tech-item">PARSEQ</span></div>
+            </div>
+        </section>
+        <section id="experience">
+            <h3><i class="fas fa-briefcase"></i>Experience</h3>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Backend Developer & AI Integration</span><span
+                        class="card-date">Sep 2025 | Vectores AI</span></div>
+                <div class="card-subtitle" style="margin-bottom: 1rem; color: var(--accent);">3rd Place,
+                    IEEE VICTORIS Competition</div>
+                <ul>
+                    <li>Implemented multi-role authentication and authorization system for Students & Teachers
+                        (JWT+RBAC).</li>
+                    <li>Built lessons/materials management: upload PDFs,
+                        videos,
+                        to Cloudinary;
+                        auto-synced to AI model (RAG + LangChain).</li>
+                    <li>Integrated AI Chatbot: students query lessons using natural language.</li>
+                    <li>Designed quizzes with AI-assisted question generation and auto-grading.</li>
+                    <li>Real-time chat & notifications using Socket.IO.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Freelance Backend Developer</span><span
+                        class="card-date">2024 - Present | Remote</span></div>
+                <ul>
+                    <li>Developed multiple backend services and REST APIs for clients using Django,
+                        Express,
+                        and FastAPI.</li>
+                    <li>Implemented database models,
+                        authentication,
+                        and role-based access control.</li>
+                    <li>Integrated caching,
+                        message queues,
+                        and background tasks for performance.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Freelance Database Administrator</span><span
+                        class="card-date">2022 - 2024 | Remote</span></div>
+                <ul>
+                    <li>Managed PostgreSQL,
+                        MySQL,
+                        MongoDB,
+                        and Cassandra databases for multiple clients.</li>
+                    <li>Performed schema design,
+                        query optimization,
+                        backups,
+                        and performance tuning.</li>
+                    <li>Implemented replication,
+                        monitoring,
+                        and alerting for high availability.</li>
+                </ul>
+            </div>
+        </section>
+        <section id="education">
+            <h3><i class="fas fa-graduation-cap"></i>Education</h3>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Mansoura University</span><span class="card-date">Oct
+                        2021 - Jun 2026</span></div>
+                <div class="card-subtitle">Bachelor of Computer and Control Engineering</div>
+                <div style="margin-top: 0.5rem; color: var(--accent);">GPA: Excellent with honors</div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
