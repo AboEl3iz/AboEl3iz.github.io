@@ -466,34 +466,58 @@
         <section id="projects">
             <h3><i class="fas fa-laptop-code"></i>Featured Projects</h3>
             <div class="card">
-    <div class="card-header">
-        <span class="card-title">Inventory & Sales Management System</span>
-        <span class="card-subtitle">
-            <a href="https://github.com/AboEl3iz/multi-gym.git" target="_blank">
-                <i class="fab fa-github"></i>View Code
-            </a>
-        </span>
-    </div>
-    <ul>
-        <li>Built a multi-branch inventory system with real-time stock tracking,
-            complete product catalog with variants,
-            and Cloudinary image storage.</li>
-        <li>Implemented supplier management,
-            automated reorder suggestions,
-            purchase order processing,
-            and detailed financial reporting.</li>
-        <li>Designed role-based access control with employee performance analytics and real-time stock
-            movement tracking.</li>
-        <li>Developed event-driven architecture with Redis caching and structured logging using Winston.</li>
-    </ul>
-    <div class="tech-stack">
-        <span class="tech-item">NestJS</span>
-        <span class="tech-item">TypeScript</span>
-        <span class="tech-item">PostgreSQL</span>
-        <span class="tech-item">Redis</span>
-        <span class="tech-item">BullMQ</span>
-    </div>
+  <div class="card-header">
+    <span class="card-title">Multi-Gym Management System</span>
+    <span class="card-subtitle">
+      <a href="https://github.com/AboEl3iz/multi-gym.git" target="_blank">
+        <i class="fab fa-github"></i>View Code
+      </a>
+    </span>
+  </div>
+  <ul>
+    <li>
+      Built a production-grade, multi-tenant REST API in <strong>Node.js / Express (TypeScript)</strong> serving
+      4 distinct role-based dashboards — SuperAdmin, BranchAdmin, Trainer, and Member — each with real-time
+      KPIs: revenue trends, churn rate, member growth, top trainers, and average class attendance.
+    </li>
+    <li>
+      Engineered a fully relational schema with <strong>TypeORM + PostgreSQL</strong> (10 entities: Users, Branches,
+      Classes, Rooms, Schedules, Bookings, Reports, Offers, Chat, Notifications) with automated conflict detection
+      that prevents trainer / room double-booking across any branch.
+    </li>
+    <li>
+      Implemented end-to-end security with <strong>JWT + bcrypt</strong> authentication and granular RBAC middleware;
+      integrated <strong>Socket.IO</strong> for real-time in-app chat, <strong>Nodemailer</strong> for automated
+      email notifications, and <strong>PDFKit</strong> for on-demand downloadable reports.
+    </li>
+    <li>
+      Containerized with <strong>Docker</strong> and deployed to <strong>Kubernetes</strong> (Deployment, Service,
+      ConfigMap, Secrets, TLS Ingress via Nginx); automated CI/CD pipeline with <strong>GitHub Actions</strong>
+      — runs the Jest unit test suite (11 test files) on every push, then builds and pushes the image to
+      <strong>Docker Hub</strong> only on green builds.
+    </li>
+    <li>
+      Exposed a full <strong>OpenAPI 3.0 / Swagger UI</strong> at <code>/api-docs</code> covering all 13 route
+      groups (auth, branches, users, classes, rooms, schedules, bookings, reports, offers, chat, notifications,
+      dashboard) with Bearer-token security schemes.
+    </li>
+  </ul>
+  <div class="tech-stack">
+    <span class="tech-item">Node.js</span>
+    <span class="tech-item">TypeScript</span>
+    <span class="tech-item">Express</span>
+    <span class="tech-item">PostgreSQL</span>
+    <span class="tech-item">TypeORM</span>
+    <span class="tech-item">Socket.IO</span>
+    <span class="tech-item">Docker</span>
+    <span class="tech-item">Kubernetes</span>
+    <span class="tech-item">GitHub Actions</span>
+    <span class="tech-item">Swagger / OpenAPI</span>
+    <span class="tech-item">JWT</span>
+    <span class="tech-item">Jest</span>
+  </div>
 </div>
+
 
            <div class="card">
     <div class="card-header">
@@ -629,6 +653,7 @@
 
 
 </html>
+
 
 
 
